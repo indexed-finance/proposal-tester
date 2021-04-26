@@ -8,6 +8,8 @@ export const Governance = Timelock;
 
 export const UniswapOracle = '0xFa5a44D3Ba93D666Bf29C8804a36e725ecAc659A';
 
+export const GovernorAlpha = '0x95129751769f99cc39824a0793ef4933dd8bb74b';
+
 /* Controllers / Factories */
 
 export const PoolFactory = '0x592f70ce43a310d15ff59be1460f38ab6df3fe65';
