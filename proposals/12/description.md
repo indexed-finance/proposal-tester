@@ -1,5 +1,7 @@
 # Upgrade Proxies for Index Pools and Controllers
 
+Discussion Thread: https://forum.indexed.finance/t/proposal-upgrade-proxies-for-index-pools-and-controllers/645
+
 ## Summary
 
 The main impetus for this set of upgrades is the current issue in DEGEN - the rebalance is being delayed and mints/swaps blocked in many cases due to the pool having hit its max weight when RGT was added. An upgrade was required to fix this, so I decided to add some other changes that were due for a merge.
