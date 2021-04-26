@@ -496,18 +496,6 @@ describe('Proposal 12: Upgrades of Controllers & Index Pools', () => {
   });
 
   describe('Execute Upgrades', () => {
-    // let sigmaControllerUpgrade: string;
-    // let sigmaPoolUpgrade: string;
-    // let coreControllerUpgrade: string;
-    // let corePoolUpgrade: string;
-
-    // it('Deploy upgrades', async () => {
-    //   sigmaControllerUpgrade = await deploy(SigmaControllerBytecode);
-    //   sigmaPoolUpgrade = await deploy(SigmaPoolBytecode);
-    //   coreControllerUpgrade = await deploy(CoreControllerBytecode);
-    //   corePoolUpgrade = await deploy(CorePoolBytecode);
-    // });
-
     it('Executes proposal transactions', async () => {
       const transactions = TestProposalTransactions; //getProposalTransactions(sigmaControllerUpgrade, sigmaPoolUpgrade, coreControllerUpgrade, corePoolUpgrade);
       await withSigner(Timelock, async (signer) => {
