@@ -1,4 +1,5 @@
-# Proxy Upgrades for Index Pools and Controllers
+# Upgrade Proxies for Index Pools and Controllers
+
 ## Summary
 
 The main impetus for this set of upgrades is the current issue in DEGEN - the rebalance is being delayed and mints/swaps blocked in many cases due to the pool having hit its max weight when RGT was added. An upgrade was required to fix this, so I decided to add some other changes that were due for a merge.
@@ -6,6 +7,7 @@ The main impetus for this set of upgrades is the current issue in DEGEN - the re
 Some queries and events will be added to simplify subgraph tracking and keeper management. Exit fees of 0.5% will be added to the core pools and the default swap fee will be set to 2% across the board. Some new control functions will be added to allow governance to update parameters without further proxy upgrades.
 
 ### Transactions
+
 1. Set proxy implementation for SigmaControllerV1.sol to `0xE8721b30211F3b487F02173D054F704301983423`
 2. Set proxy implementation for SigmaIndexPoolV1.sol to `0xf0204D5aEA78F7d9EbE0E0c4fB21fA67426BFefc`
 3. Set proxy implementation for MarketCapSqrtController.sol to `0x120C6956D292B800A835cB935c9dd326bDB4e011`
@@ -26,7 +28,7 @@ Pull request with modifications to the core contracts:
 https://github.com/indexed-finance/indexed-core/pull/68
 
 Tests of this proposal's transactions against a fork of mainnet:
-https://github.com/indexed-finance/upgrade-tests
+https://github.com/indexed-finance/proposal-tester
 
 ## Contract Modifications
 
@@ -37,6 +39,7 @@ This proposal would upgrade the proxy implementations for the following contract
 - SigmaIndexPoolV1.sol
 
 ### Controllers
+
 - Add `setController` function.
   - Allows governance to set controller on an existing pool.
 - Add `setExitFeeRecipient(address,address)` function.
@@ -51,16 +54,19 @@ This proposal would upgrade the proxy implementations for the following contract
 	- Enables easier subgraph tracking.
 
 **Core Controller**
+
 - Add `getPoolMeta` function.
 	- Enables queries for reweigh timing.
 
 **Sigma Controller**
+
 - Add immutable `governance` address.
 - Move `defaultExitFeeRecipient` from bytecode to storage.
 - Add `validTokenList` modifier to function `getTokenScores`.
 - Give governance control over `setSwapFee`.
 
 ### Index Pools
+
 - Set default swap fee to 2% instead of 2.5%.
 - Change reweigh behavior:
 	- Weight changes which would exceed the maximum total weight will not occur rather than reverting.
@@ -74,6 +80,7 @@ This proposal would upgrade the proxy implementations for the following contract
 	- Enables easier subgraph tracking.
 
 **Core Index Pool**
+
 - Add exit fee of 0.5%.
 - Send exit fees to `_exitFeeRecipient` instead of `_controller`.
 - Add `setExitFeeRecipient`.
@@ -82,4 +89,5 @@ This proposal would upgrade the proxy implementations for the following contract
 	-  Not being used and code size is near maximum.
 
 **Sigma Index Pool**
+
 - Change `setExitFeeRecipient` call permission from only current fee recipient to only controller.
